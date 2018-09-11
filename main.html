@@ -7,6 +7,7 @@
     <script type="text/javascript">
     <!--
 
+        
         // Copied from StackOverflow
         function toTitleCase(str) {
             return str.replace(
@@ -48,6 +49,8 @@
         function checkPress(press, curString) {
             if (curString.length < 2) {
                 makeSentence();
+                curXp += 100;
+                document.getElementById("xpCounter").innerHTML = curXp.toString();
             }
             else if (press == curString[0]) {
                 curString = curString.substr(1);
@@ -68,6 +71,9 @@
             checkPress(charStr, theSentence);
         };
         
+        curXp = 0;
+        document.getElementById("xpCounter").innerHTML = curXp.toString();
+        
     // -->
     </script>
 </head>
@@ -77,7 +83,10 @@
 <body onload="makeSentence()">
 
 
-    <p id="theWord" style="">here</p>
+    <p id="theWord">sentence</p>
+    <p>Current xp:</p>
+    <p id="xpCounter">0</p>
+    <input type="text" size="1" /> <!--for mobile users-->
 
 </body>
 </html>
