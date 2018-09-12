@@ -49,13 +49,8 @@
         
         
         function checkPress(press, curString) {
-            if (curString.length < 2) {
-                makeSentence();
-                curXp += xpReward;
-                xpReward = 100;
-                document.getElementById("xpCounter").innerHTML = curXp.toString();
-            }
-            else if (press == curString[0]) {
+            
+            if (press == curString[0]) {
                 curString = curString.substr(1);
                 document.getElementById("theWord").innerHTML = curString;
             }
@@ -65,6 +60,12 @@
                 }
                 //alert("wrong character!");
                 //makeSentence();
+            }
+            if (curString.length < 1) {
+                makeSentence();
+                curXp += xpReward;
+                xpReward = 100;
+                document.getElementById("xpCounter").innerHTML = curXp.toString();
             }
         }
         
