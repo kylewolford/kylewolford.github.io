@@ -8,14 +8,9 @@
     <!--
 
         
-        // Copied from StackOverflow
-        function toTitleCase(str) {
-            return str.replace(
-            /\w\S*/g,
-                function(txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                }
-            );
+        // Modified from StackOverflow
+        function capitalizeWord(str) {
+            return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
         }
 
         // Wikimedia top 400 most commonly used words
@@ -36,7 +31,7 @@
             var maxWords = 15;
             var sentence = "";
             var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
-            sentence = toTitleCase(getWord()) + " ";
+            sentence = capitalizeWord(getWord()) + " ";
             //sentence = getWord() + " ";
             for (var i=0; i<sentenceWords; i++) {
                 sentence = sentence + getWord() + " ";
