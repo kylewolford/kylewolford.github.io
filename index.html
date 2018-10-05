@@ -80,11 +80,11 @@
             document.getElementById("theWord").innerHTML = sentence;
         }
         
-        // Generates sentences between 10 and 15 words, with random punctuation between words
+        // Generates sentences between 15 and 25 words, with random punctuation between words
         function makeNormalSentence() {
-            var possSpaces = [" ", " ", " ", " ", " ", " ", " ", ", ", ": ", "; ", ". ", "! ", "? "];
-            var minWords = 10;
-            var maxWords = 15;
+            var possSpaces = [" ", " ", " ", " ", " ", " ", " ", ", ", ", ", ", ", ": ", "; ", ". ", "! ", "? "];
+            var minWords = 15;
+            var maxWords = 25;
             var sentence = "";
             var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
             sentence = capitalizeWord(getWord()) + possSpaces[Math.floor(Math.random()*possSpaces.length)];
