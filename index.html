@@ -3,6 +3,22 @@
 <head>
 
 
+<!-- implementing Firebase in the web app -->    
+    <!--<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAf5i2ZBAsCTSuJkExkzvvn2Fju6R-xTKg",
+    authDomain: "typing-hero-3c2d2.firebaseapp.com",
+    databaseURL: "https://typing-hero-3c2d2.firebaseio.com",
+    projectId: "typing-hero-3c2d2",
+    storageBucket: "typing-hero-3c2d2.appspot.com",
+    messagingSenderId: "805210312897"
+  };
+  firebase.initializeApp(config);
+</script>-->
+    
+    
     <!-- Crude sentence generator (grammar not taken into account at all) --> 
     <script type="text/javascript">
     <!--
@@ -18,7 +34,32 @@
 
         var numWords = wordList.length;
         
-        var xpReward = 100; // default value
+        var difficulty = 1; // 0 - easy, 1 - medium, 2 - hard
+        
+        var totalXp = [100, 500, 1000]; // max xp per sentence for each level
+        
+        var xpReward = -1;
+        
+        function makeSentence() {
+            switch (difficulty) {
+                case 0:
+                    makeEasySentence();
+                    break;
+                case 1:
+                    makeNormalSentence();
+                    break;
+                case 2:
+                    makeHardSentence();
+                    break;
+                default:
+                    alert("invalid difficulty");
+                    break;
+            }
+            // Applicable to all sentences
+            xpReward = totalXp[difficulty];
+            document.getElementById("curReward").innerHTML = totalXp[difficulty];
+            
+        }
 
         function getWord() {
             var wordIndex = Math.floor(Math.random() * numWords);
@@ -26,21 +67,48 @@
         }
     
         // Generates sentences between 5 and 10 words
-        function makeSentence() {
-            var minWords = 3;
-            var maxWords = 15;
+        function makeEasySentence() {
+            var minWords = 5;
+            var maxWords = 10;
             var sentence = "";
             var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
             sentence = capitalizeWord(getWord()) + " ";
-            //sentence = getWord() + " ";
             for (var i=0; i<sentenceWords; i++) {
                 sentence = sentence + getWord() + " ";
             }
             sentence = sentence + getWord() + "."
-            
             document.getElementById("theWord").innerHTML = sentence;
         }
         
+        // Generates sentences between 10 and 15 words, with random punctuation between words
+        function makeNormalSentence() {
+            var possSpaces = [" ", " ", " ", " ", " ", " ", " ", ", ", ": ", "; ", ". ", "! ", "? "];
+            var minWords = 10;
+            var maxWords = 15;
+            var sentence = "";
+            var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
+            sentence = capitalizeWord(getWord()) + possSpaces[Math.floor(Math.random()*possSpaces.length)];
+            for (var i=0; i<sentenceWords; i++) {
+                sentence = sentence + getWord() + possSpaces[Math.floor(Math.random()*possSpaces.length)];
+            }
+            sentence = sentence + getWord() + "."
+            document.getElementById("theWord").innerHTML = sentence;
+        }
+        
+        // Generates random string between 20 and 30 characters
+        function makeHardSentence() {
+            var minChars = 20;
+            var maxChars = 30;
+            var sentence = "";
+            var sentenceChars = Math.floor(Math.random() * (maxChars - minChars + 1)) + minChars - 1;
+            
+            // each of these adds up to 13 chars
+            while (sentence.length + 12 < sentenceChars) {
+                sentence = sentence + Math.random().toString(36);
+            }
+            sentence = sentence + Math.random().toString(36).substring(sentenceChars-sentence.length);
+            document.getElementById("theWord").innerHTML = sentence;
+        }
         
         
         function checkPress(press, curString) {
@@ -50,18 +118,23 @@
                 document.getElementById("theWord").innerHTML = curString;
             }
             else {
-                if (xpReward >= 52) {
-                    xpReward -= 2;
+                if (xpReward > 0.5*totalXp[difficulty]) { // prevent xp reward from going below 50%
+                    xpReward -= 0.02*totalXp[difficulty];
+                    document.getElementById("curReward").innerHTML = xpReward;
                 }
-                //alert("wrong character!");
-                //makeSentence();
             }
             if (curString.length < 1) {
-                makeSentence();
                 curXp += xpReward;
-                xpReward = 100;
+                xpReward = totalXp[difficulty];
+                makeSentence();
+                
                 document.getElementById("xpCounter").innerHTML = curXp.toString();
             }
+        }
+        
+        function changeDifficulty(newDiff) {
+            difficulty = newDiff;
+            makeSentence();
         }
         
         // modified from StackOverflow
@@ -76,6 +149,42 @@
         curXp = 0;
         document.getElementById("xpCounter").innerHTML = curXp.toString();
         
+        
+        /*function newAccount(name) {
+            var nameObject = {
+               name: name
+               xp : 0
+            };
+
+            firebase.database().ref('users').push().set(emailObject)
+                .then(function(snapshot) {
+                //success(); // some success method
+                alert("account created successfully");
+            }, function(error) {
+                console.log('error' + error);
+                //error(); // some error method
+                alert("account not created successfully");
+            });
+        }*/
+
+        /*function giveXp(xp) {
+            var nameObject = {
+               name: name
+               xp : 0
+            };
+
+            firebase.database().ref('users').push().set(emailObject)
+                .then(function(snapshot) {
+                //success(); // some success method
+                alert("account created successfully");
+            }, function(error) {
+                console.log('error' + error);
+                //error(); // some error method
+                alert("account not created successfully");
+            });
+        }*/
+        
+        
     // -->
     </script>
 </head>
@@ -88,6 +197,15 @@
     <p id="theWord">sentence</p>
     <p>Current xp:</p>
     <p id="xpCounter">0</p>
-
+    <p>Xp for finishing this sentence:</p>
+    <p id="curReward">0</p>
+    
+    <p>Choose your difficulty:</p>
+    <form>
+    <input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
+    <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
+    <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
+    </form>
+    
 </body>
 </html>
