@@ -8,7 +8,7 @@ var wordList = ["the", "of", "and", "to", "in", "I", "that", "was", "he", "his",
 
 var numWords = wordList.length;
         
-var difficulty = 1; // 0 - easy, 1 - medium, 2 - hard
+var difficulty = 0; // 0 - easy, 1 - medium, 2 - hard
         
 var totalXp = [100, 500, 1000]; // max xp per sentence for each level
         
