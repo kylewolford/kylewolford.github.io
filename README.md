@@ -1,5 +1,5 @@
 # typing-hero (kylewolford.github.io)
 
-This version is intended to be a proof of concept for the "sentence" generator and keyboard input.
+A touch-typing edutainment RPG that rewards players for successfully typing the sentence presented on-screen.
 
 To try out the current version, go to https://kylewolford.github.io/.
