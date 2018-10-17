@@ -60,7 +60,7 @@ var mainApp = {};
         // Create a sample user to the database
         var path = 'users/' + uid;
         var data = {
-            username: "Kyle",
+            username: "username",
             xp: 0
         }
         
