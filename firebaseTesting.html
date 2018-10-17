@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+<script type="text/javascript">
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyAf5i2ZBAsCTSuJkExkzvvn2Fju6R-xTKg",
+  authDomain: "typing-hero-3c2d2.firebaseapp.com",
+  databaseURL: "https://typing-hero-3c2d2.firebaseio.com",
+  projectId: "typing-hero-3c2d2",
+  storageBucket: "typing-hero-3c2d2.appspot.com",
+  messagingSenderId: "805210312897"
+};
+firebase.initializeApp(config);
+
+function writeUserData(userId, name, xp) {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    xp: xp
+  });
+}
+
+/*
+var ref = firebase.database().ref();
+ref.on("value", function(snapshot){
+    document.getElementById("nameField".innerHTML = JSON.stringify(snapshot.val(), null, 2);
+});
+*/
+curId = 0;
+
+function addUser() {
+    writeUserData(
+        curId,
+        document.getElementById("nameField").value, Number(document.getElementById("xpField").value)
+    );
+    curId++;
+}
+</script>
+</head>
+
+<body>
+<p>
+Hello there! Please enter a name and an xp amount:
+</p>
+<form>
+<input type="text" id="nameField" />
+<input type="text" id="xpField" />
+<input type="button" name="Sumbit" onClick="addUser()" value="Submit" />
+</form>
+</body>
+</html>

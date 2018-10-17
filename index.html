@@ -1,211 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-<!-- implementing Firebase in the web app -->    
-    <!--<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAf5i2ZBAsCTSuJkExkzvvn2Fju6R-xTKg",
-    authDomain: "typing-hero-3c2d2.firebaseapp.com",
-    databaseURL: "https://typing-hero-3c2d2.firebaseio.com",
-    projectId: "typing-hero-3c2d2",
-    storageBucket: "typing-hero-3c2d2.appspot.com",
-    messagingSenderId: "805210312897"
-  };
-  firebase.initializeApp(config);
-</script>-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
     
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+</head>
+<body onload="setup()">
     
-    <!-- Crude sentence generator (grammar not taken into account at all) --> 
+    <script src="firebase.js"></script>
+    <script src="index.js"></script>
+    <script src="game.js"></script>
+    
     <script type="text/javascript">
     <!--
-
-        
-        // Modified from StackOverflow
-        function capitalizeWord(str) {
-            return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
-        }
-
-        // Wikimedia top 400 most commonly used words
-        var wordList = ["the", "of", "and", "to", "in", "I", "that", "was", "he", "his", "it", "with", "is", "for", "as", "had", "you", "not", "be", "on", "at", "her", "by", "which", "have", "or", "from", "this", "him", "but", "all", "she", "were", "they", "my", "are", "me", "so", "one", "their", "de", "an", "said", "we", "them", "who", "would", "been", "will", "no", "when", "there", "if", "more", "out", "up", "any", "into", "do", "your", "has", "man", "what", "could", "other", "our", "than", "some", "very", "time", "about", "upon", "may", "la", "its", "only", "now", "little", "like", "then", "can", "made", "should", "did", "us", "such", "a", "great", "before", "must", "these", "two", "see", "over", "know", "much", "et", "after", "first", "Mr", "down", "good", "men", "own", "most", "never", "where", "old", "day", "work", "those", "come", "shall", "himself", "came", "way", "without", "life", "make", "go", "long", "being", "well", "through", "might", "say", "am", "en", "too", "many", "even", "again", "back", "here", "people", "think", "every", "same", "under", "last", "went", "thought", "les", "found", "take", "still", "hand", "place", "also", "while", "just", "def", "against", "die", "though", "young", "years", "get", "ever", "things", "give", "part", "nothing", "face", "off", "right", "left", "once", "another", "god", "world", "house", "saw", "three", "new", "always", "took", "put", "head", "love", "each", "mrs", "night", "between", "son", "few", "because", "mind", "tell", "whom", "thing", "heart", "far", "lord", "seemed", "set", "whole", "days", "got", "country", "both", "find", "done", "name", "told", "look", "having", "heard", "seen", "let", "going", "better", "home", "moment", "knew", "side", "something", "course", "among", "full", "enough", "woman", "father", "soon", "words", "gave", "end", "Gutenberg", "almost", "cannot", "small", "er", "door", "room", "water", "want", "however", "brought", "given", "word", "whose", "use", "nor", "quite", "light", "best", "does", "morning", "till", "myself", "since", "present", "turned", "used", "themselves", "rather", "until", "power", "others", "felt", "thou", "money", "mother", "began", "less", "war", "next", "den", "within", "form", "large", "poor", "certain", "death", "year", "y", "together", "matter", "kind", "stood", "order", "often", "sent", "half", "herself", "friend", "wife", "anything", "keep", "true", "means", "hundred", "round", "point", "state", "thy", "received", "white", "believe", "passed", "person", "read", "feet", "case", "pour", "city", "thus", "2", "children", "alone", "above", "fact", "high", "already", "dear", "known", "met", "english", "says", "gone", "times", "girl", "least", "perhaps", "land", "hope", "nature", "return", "letter", "open", "along", "air", "sure", "indeed", "number", "leave", "four", "body", "women", "either", "thee", "free", "help", "wish", "business", "during", "general", "several", "therefore", "hour", "lay", "held", "friends", "second", "fire", "speak", "whether", "reason", "john", "thousand", "manner", "cried", "king", "forth", "become", "England", "question", "call", "terms", "became", "replied", "lost", "why", "behind", "family", "dead", "possible", "following", "law", "feel", "electronic", "cause", "boy", "care", "different", "plus", "looking", "ground", "rest", "making", "soul", "really", "town", "mean", "human", "truth", "short", "kept", "subject", "french"];
-
-        var numWords = wordList.length;
-        
-        var difficulty = 0; // 0 - easy, 1 - medium, 2 - hard
-        
-        var totalXp = [100, 500, 1000]; // max xp per sentence for each level
-        
-        var xpReward = -1;
-        
-        function makeSentence() {
-            switch (difficulty) {
-                case 0:
-                    makeEasySentence();
-                    break;
-                case 1:
-                    makeNormalSentence();
-                    break;
-                case 2:
-                    makeHardSentence();
-                    break;
-                default:
-                    alert("invalid difficulty");
-                    break;
-            }
-            // Applicable to all sentences
-            xpReward = totalXp[difficulty];
-            document.getElementById("curReward").innerHTML = totalXp[difficulty];
-            
-        }
-
-        function getWord() {
-            var wordIndex = Math.floor(Math.random() * numWords);
-            return wordList[wordIndex];
-        }
-    
-        // Generates sentences between 5 and 10 words
-        function makeEasySentence() {
-            var minWords = 5;
-            var maxWords = 10;
-            var sentence = "";
-            var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
-            sentence = capitalizeWord(getWord()) + " ";
-            for (var i=0; i<sentenceWords; i++) {
-                sentence = sentence + getWord() + " ";
-            }
-            sentence = sentence + getWord() + "."
-            document.getElementById("theWord").innerHTML = sentence;
-        }
-        
-        // Generates sentences between 15 and 25 words, with random punctuation between words
-        function makeNormalSentence() {
-            var possSpaces = [" ", " ", " ", " ", " ", " ", " ", ", ", ", ", ", ", ": ", "; ", ". ", "! ", "? "];
-            var minWords = 15;
-            var maxWords = 25;
-            var sentence = "";
-            var sentenceWords = Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords - 1;
-            sentence = capitalizeWord(getWord()) + possSpaces[Math.floor(Math.random()*possSpaces.length)];
-            for (var i=0; i<sentenceWords; i++) {
-                sentence = sentence + getWord() + possSpaces[Math.floor(Math.random()*possSpaces.length)];
-            }
-            sentence = sentence + getWord() + "."
-            document.getElementById("theWord").innerHTML = sentence;
-        }
-        
-        // Generates random string between 20 and 30 characters
-        function makeHardSentence() {
-            var minChars = 20;
-            var maxChars = 30;
-            var sentence = "";
-            var sentenceChars = Math.floor(Math.random() * (maxChars - minChars + 1)) + minChars - 1;
-            
-            // each of these adds up to 13 chars
-            while (sentence.length + 12 < sentenceChars) {
-                sentence = sentence + Math.random().toString(36);
-            }
-            sentence = sentence + Math.random().toString(36).substring(sentenceChars-sentence.length);
-            document.getElementById("theWord").innerHTML = sentence;
-        }
-        
-        
-        function checkPress(press, curString) {
-            
-            if (press == curString[0]) {
-                curString = curString.substr(1);
-                document.getElementById("theWord").innerHTML = curString;
-            }
-            else {
-                if (xpReward > 0.5*totalXp[difficulty]) { // prevent xp reward from going below 50%
-                    xpReward -= 0.02*totalXp[difficulty];
-                    document.getElementById("curReward").innerHTML = xpReward;
-                }
-            }
-            if (curString.length < 1) {
-                curXp += xpReward;
-                xpReward = totalXp[difficulty];
-                makeSentence();
-                
-                document.getElementById("xpCounter").innerHTML = curXp.toString();
-            }
-        }
-        
-        function changeDifficulty(newDiff) {
-            difficulty = newDiff;
-            makeSentence();
-        }
-        
-        // modified from StackOverflow
-        document.onkeypress = function(evt) {
-            evt = evt || window.event;
-            var charCode = evt.keyCode || evt.which;
-            var charStr = String.fromCharCode(charCode);
-            theSentence = document.getElementById("theWord").innerHTML;
-            checkPress(charStr, theSentence);
-        };
-        
-        curXp = 0;
-        document.getElementById("xpCounter").innerHTML = curXp.toString();
-        
-        
-        /*function newAccount(name) {
-            var nameObject = {
-               name: name
-               xp : 0
-            };
-
-            firebase.database().ref('users').push().set(emailObject)
-                .then(function(snapshot) {
-                //success(); // some success method
-                alert("account created successfully");
-            }, function(error) {
-                console.log('error' + error);
-                //error(); // some error method
-                alert("account not created successfully");
-            });
-        }*/
-
-        /*function giveXp(xp) {
-            var nameObject = {
-               name: name
-               xp : 0
-            };
-
-            firebase.database().ref('users').push().set(emailObject)
-                .then(function(snapshot) {
-                //success(); // some success method
-                alert("account created successfully");
-            }, function(error) {
-                console.log('error' + error);
-                //error(); // some error method
-                alert("account not created successfully");
-            });
-        }*/
-        
-        
+    function setup() {
+        //mainApp.copyToLocal();
+        makeSentence();
+    }
     // -->
     </script>
-</head>
-
-
-
-<body onload="makeSentence()">
-
-
+    
+    <h1>Main Area</h1>
+    <button onclick="mainApp.logOut()">Log out</button>
+    
+    <button onclick="mainApp.fnCreate()">Make new user</button>
+    <button onclick="mainApp.seeInfo()">See info</button>
+    <button onclick="mainApp.giveXp(0)">Give xp</button>
+    <button onclick="mainApp.fnDelete()">Delete user</button>
+    <!---->
     <p id="theWord">sentence</p>
     <p>Current xp:</p>
-    <p id="xpCounter">0</p>
+    <p id="xpCounter">Loading...</p>
     <p>Xp for finishing this sentence:</p>
     <p id="curReward">0</p>
     
     <p>Choose your difficulty:</p>
     <form>
-    <input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
-    <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
+    <input type="radio" name="difficulty" onchange="changeDifficulty(0)" />Easy
+    <input type="radio" name="difficulty" onchange="changeDifficulty(1)" checked/>Normal
     <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
     </form>
+    
     
 </body>
 </html>
