@@ -24,13 +24,6 @@ var app_fireBase = {};
         return firebase.database().ref(path).once('value').then(successFunction);
     }
     
-    /*function fnMonitor(path, , monitorFunction, successFunction, errorFunction) {
-        if (!path) return;
-        
-        firebase.database().ref(path).on('value', snap => {
-            let user = sna
-        }, monitorFunction);
-    }*/
     
     function fnUpdate(path, body, callback) {
         if (!path || !body) return;
@@ -46,7 +39,6 @@ var app_fireBase = {};
     app_fireBase.databaseApi = {
         create: fnCreate,
         read: fnRead,
-        //monitor: fnMonitor,
         update: fnUpdate,
         delete: fnDelete
     }

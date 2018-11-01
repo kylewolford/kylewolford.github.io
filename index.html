@@ -10,40 +10,48 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
 </head>
-<body onload="setup()">
+<body onload="gameSetup()">
+
     
     <script src="firebase.js"></script>
     <script src="index.js"></script>
     <script src="game.js"></script>
-    
     <script type="text/javascript">
     <!--
-    function setup() {
-        //mainApp.copyToLocal();
-        makeSentence();
-    }
+        function gameSetup() {
+            mainApp.initialSetup();
+            makeSentence();
+        }
+        function updateUsername() {
+            var newName = document.getElementById('newUnameInput').value;
+            mainApp.changeUsername(newName);
+            document.getElementById('newUnameInput').value = '';
+        }
+
     // -->
     </script>
     
-    <h1>Main Area</h1>
+    
+    
+    <h1 id="introHeading">Loading...</h1>
     <button onclick="mainApp.logOut()">Log out</button>
     
-    <button onclick="mainApp.fnCreate()">Make new user</button>
-    <button onclick="mainApp.seeInfo()">See info</button>
-    <button onclick="mainApp.giveXp(0)">Give xp</button>
-    <button onclick="mainApp.fnDelete()">Delete user</button>
-    <!---->
     <p id="theWord">sentence</p>
     <p>Current xp:</p>
     <p id="xpCounter">Loading...</p>
     <p>Xp for finishing this sentence:</p>
     <p id="curReward">0</p>
     
-    <p>Choose your difficulty:</p>
     <form>
-    <input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
-    <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
-    <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
+        <p>Choose your difficulty:</p><input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
+        <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
+        <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
+        
+        <p id="unameChangePrompt">Loading...</p>
+        <input type="text" id="newUnameInput" />
+        <input type="button" value="change" onClick="updateUsername()") /><br />
+    
+
     </form>
     
     

@@ -1,7 +1,3 @@
-// Modified from StackOverflow
-function capitalizeWord(str) {
-    return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
-}
 
 // Wikimedia top 400 most commonly used words
 var wordList = ["the", "of", "and", "to", "in", "I", "that", "was", "he", "his", "it", "with", "is", "for", "as", "had", "you", "not", "be", "on", "at", "her", "by", "which", "have", "or", "from", "this", "him", "but", "all", "she", "wee", "they", "my", "are", "me", "so", "one", "their", "de", "an", "said", "we", "them", "who", "would", "been", "will", "no", "when", "there", "if", "more", "out", "up", "any", "into", "do", "your", "has", "man", "what", "could", "other", "our", "than", "some", "very", "time", "about", "upon", "may", "la", "its", "only", "now", "little", "like", "then", "can", "made", "should", "did", "us", "such", "a", "great", "before", "must", "these", "two", "see", "over", "know", "much", "et", "after", "first", "Mr", "down", "good", "men", "own", "most", "never", "where", "old", "day", "work", "those", "come", "shall", "himself", "came", "way", "without", "life", "make", "go", "long", "being", "well", "through", "might", "say", "am", "en", "too", "many", "even", "again", "back", "here", "people", "think", "every", "same", "under", "last", "went", "thought", "les", "found", "take", "still", "hand", "place", "also", "while", "just", "def", "against", "die", "though", "young", "years", "get", "ever", "things", "give", "part", "nothing", "face", "off", "right", "left", "once", "another", "god", "world", "house", "saw", "three", "new", "always", "took", "put", "head", "love", "each", "mrs", "night", "between", "son", "few", "because", "mind", "tell", "whom", "thing", "heart", "far", "lord", "seemed", "set", "whole", "days", "got", "country", "both", "find", "done", "name", "told", "look", "having", "heard", "seen", "let", "going", "better", "home", "moment", "knew", "side", "something", "course", "among", "full", "enough", "woman", "father", "soon", "words", "gave", "end", "Gutenberg", "almost", "cannot", "small", "er", "door", "room", "water", "want", "however", "brought", "given", "word", "whose", "use", "nor", "quite", "light", "best", "does", "morning", "till", "myself", "since", "present", "turned", "used", "themselves", "rather", "until", "power", "others", "felt", "thou", "money", "mother", "began", "less", "war", "next", "den", "within", "form", "large", "poor", "certain", "death", "year", "y", "together", "matter", "kind", "stood", "order", "often", "sent", "half", "herself", "friend", "wife", "anything", "keep", "true", "means", "hundred", "round", "point", "state", "thy", "received", "white", "believe", "passed", "person", "read", "feet", "case", "pour", "city", "thus", "2", "children", "alone", "above", "fact", "high", "already", "dear", "known", "met", "english", "says", "gone", "times", "girl", "least", "perhaps", "land", "hope", "nature", "return", "letter", "open", "along", "air", "sure", "indeed", "number", "leave", "four", "body", "women", "either", "thee", "free", "help", "wish", "business", "during", "general", "several", "therefore", "hour", "lay", "held", "friends", "second", "fire", "speak", "whether", "reason", "john", "thousand", "manner", "cried", "king", "forth", "become", "England", "question", "call", "terms", "became", "replied", "lost", "why", "behind", "family", "dead", "possible", "following", "law", "feel", "electronic", "cause", "boy", "care", "different", "plus", "looking", "ground", "rest", "making", "soul", "really", "town", "mean", "human", "truth", "short", "kept", "subject", "french"];
@@ -13,6 +9,11 @@ var difficulty = 0; // 0 - easy, 1 - medium, 2 - hard
 var totalXp = [100, 500, 1000]; // max xp per sentence for each level
         
 var xpReward = -1;
+
+// Modified from StackOverflow
+function capitalizeWord(str) {
+    return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+}
         
 function makeSentence() {
     switch (difficulty) {
@@ -117,14 +118,7 @@ document.onkeypress = function(evt) {
     var charCode = evt.keyCode || evt.which;
     var charStr = String.fromCharCode(charCode);
     theSentence = document.getElementById("theWord").innerHTML;
+    
     checkPress(charStr, theSentence);
 };
-        
-//curXp = mainApp.retrieveXp();
-//document.getElementById("xpCounter").innerHTML = "" + curXp;
-    
-/*function setup() {
-    mainApp.fnRead();
-        
-}*/
         
