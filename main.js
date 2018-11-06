@@ -1,36 +1,49 @@
 
+// main.js contains functions that are used by all pages in the app
+
 var mainApp = {};
 
 var curUser = {};
 
-var curSnap = {};
-
 var numRefreshes = 0;
+
+var uid = null;
 
 (function() {
     
     //var firebase = app_fireBase;
-    var uid = null;
+    //var uid = null;
     
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
             uid = user.uid;
-            initialSetup();
+            console.log("user.uid is " + uid);
+
+            initialSetupSwitcher();
+
         } else {
             // Redirect to login page
             uid = null;
             window.location.replace("login.html");
         }
     });
+
     
     function initialSetup() {
-        //for (i=0; i<2; i++)
+        if (uid !== null) {
+            if (currentPage == "index.html") {
+                makeSentence();
+            }
             copyToLocal();
-        //if (retrieveXp() == 0) {
-            // go to tutorial
-        //    window.location.replace("tutorial.html");
-        //}
+            if (curUser.xp == 0) {
+                // go to tutorial
+                window.location.replace("tutorial.html");
+            }
+            document.getElementById("theGame").style.visibility = "visible";
+            document.getElementById("theGameLoader").style.display = "none";
+
+        }
 
     }
 
@@ -50,25 +63,9 @@ var numRefreshes = 0;
     function copyToLocal() {
         // Get username/xp of logged-in user and copy to the local object curUser.
         fnRead();
-        updateDisplays();
+        //updateDisplaysSwitcher();
     }
     
-    function retrieveUsername() {
-        copyToLocal();
-        var curUsername = curUser.username;
-        console.log("current username is ");
-        console.log(curUsername);
-        console.log("in retrieveUsername, got " + curUsername);
-        return curUsername;
-    }
-    
-    function retrieveXp() {
-        copyToLocal();
-        var curXp = curUser.xp;
-        console.log("inXp is " + curXp);
-        console.log("in retrieveXp, got " + curXp);
-        return curXp;
-    }
     
     function fnCreate() {
         if (numRefreshes >= 2) {
@@ -89,10 +86,12 @@ var numRefreshes = 0;
         
         var path = 'users/' + uid;
         function successFn(snapshot) {
-            if (snapshot != null && snapshot.val() != null) {
-                curSnap = snapshot.val();
-                curUser.username = curSnap.username;
-                curUser.xp = curSnap.xp;
+            if (snapshot !== null && snapshot.val() !== null) {
+                curUser.username = String(snapshot.child("username").val());
+                
+                curUser.xp = Number(snapshot.child("xp").val());
+
+                updateDisplaysSwitcher();
             } else {
                 fnCreate();
                 console.log("in else part of successFn");
@@ -101,6 +100,7 @@ var numRefreshes = 0;
         
         app_fireBase.databaseApi.read(path, successFn, messageHandler);
     }
+
       
     
     
@@ -123,7 +123,7 @@ var numRefreshes = 0;
     function updateDisplays() {
         document.getElementById("xpCounter").innerHTML = curUser.xp;
         document.getElementById("introHeading").innerHTML = "Hello, " + curUser.username + "!";
-        document.getElementById("unameChangePrompt").innerHTML = "Your username is currently " + curUser.username + ". You may change it using the text box below.";
+        
     }
         
     
@@ -136,7 +136,7 @@ var numRefreshes = 0;
         // push changes to db
         copyToDatabase();
         
-        updateDisplays();
+        updateDisplaysSwitcher();
     }
 
     function changeUsername(newName) {
@@ -148,7 +148,7 @@ var numRefreshes = 0;
         // push changes to db
         copyToDatabase();
         
-        updateDisplays();
+        updateDisplaysSwitcher();
     }
 
     function fnDelete() {
@@ -168,8 +168,6 @@ var numRefreshes = 0;
     mainApp.fnRead = fnRead;
     mainApp.fnUpdate = fnUpdate;
     mainApp.fnDelete = fnDelete;
-    mainApp.retrieveUsername = retrieveUsername;
-    mainApp.retrieveXp = retrieveXp;
     mainApp.giveXp = giveXp;
     mainApp.copyToLocal = copyToLocal;
     mainApp.updateDisplays = updateDisplays;
@@ -177,3 +175,30 @@ var numRefreshes = 0;
     mainApp.changeUsername = changeUsername;
 })()
 
+function initialSetupSwitcher() {
+    if (currentPage == "index.html") {
+        mainApp.initialSetup();
+        console.log("did mainApp.initialSetup");
+    }
+    else if (currentPage == "account.html") {
+        accountFunctions.initialSetup();
+        console.log("did accountFunctions.initialSetup");
+    }
+    else {
+        console.log("currentPage is " + currentPage);
+    }
+}
+
+function updateDisplaysSwitcher() {
+    if (currentPage == "index.html") {
+        mainApp.updateDisplays();
+        console.log("did mainApp.updateDisplays");
+    }
+    else if (currentPage == "account.html") {
+        accountFunctions.updateDisplays();
+        console.log("did accountFunctions.updateDisplays");
+    }
+    else {
+        console.log("currentPage is " + currentPage);
+    }
+}

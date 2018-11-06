@@ -3,53 +3,46 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Typing Hero</title>
+    <title>Account Settings - Typing Hero</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
     
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
 </head>
-<body onload="mainApp.initialSetup()">
+<body>
 
     
     <script src="firebase.js"></script>
-    <script src="game.js"></script>
     <script src="main.js"></script>
+    <script src="account.js"></script>
     <script type="text/javascript">
-    <!--
-        currentPage = "index.html";
-    // -->
-    </script>
+        <!--
+            currentPage = "account.html";
+        // -->
+        </script>
     
-    
-
-    <div id="theGameLoader">
-        <p>Typing Hero is Loading...</p>
+    <div id="accountSettingsLoader">
+        <p>Loading account settings...</p>
     </div>
 
-    <div id="theGame" style="visibility: hidden">
+    <div id="accountSettings" style="visibility: hidden">
         <header>
             <a href="index.html">Play</a>
             <a href="account.html">Account settings</a>
             <a href="" onclick="mainApp.logOut()">Log Out</a>
         </header>
-
         <h1 id="introHeading">Loading...</h1>
-        <button onclick="mainApp.logOut()">Log out</button>
     
-        <p id="theWord">Loading...</p>
         <p>Current xp:</p>
         <p id="xpCounter">Loading...</p>
-        <p>Xp for finishing this sentence:</p>
-        <p id="curReward">0</p>
     
         <form>
-            <p>Choose your difficulty:</p><input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
-            <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
-            <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
-
+            <p id="unameChangePrompt">Loading...</p>
+            <input type="text" id="newUnameInput" />
+            <input type="button" value="change" onClick="accountFunctions.updateUsername()") />
         </form>
+    
 
     </div>
     

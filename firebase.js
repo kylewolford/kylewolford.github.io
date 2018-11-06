@@ -20,7 +20,7 @@ var app_fireBase = {};
     }
     
     function fnRead(path, successFunction, errorFunction) {
-        //if (!path || !successFunction || !errorFunction) return;
+        if (!path || !successFunction || !errorFunction) return;
         return firebase.database().ref(path).once('value').then(successFunction);
     }
     
