@@ -1,27 +1,16 @@
 
 
-(function() {
-
-    var uid = null;
-
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-            uid = user.uid;
-            initialSetup();
-        } else {
-            // Redirect to login page
-            uid = null;
-            window.location.replace("login.html");
-        }
-    });
-
-    function initialSetup() {
-
+function initialSetupTutorial() {
+    if (uid !== null) {
+        mainApp.copyToLocal();
     }
+}
 
+function giveUsername(name) {
+    mainApp.changeUsername(name);
+    window.location.replace("index.html");
+}
 
+function updateDisplaysTutorial() {
 
-
-    document.getElementById("introHeading").innerHTML = "Welcome to Typing Hero, " + "";
-})
+}

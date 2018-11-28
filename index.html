@@ -10,17 +10,12 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
 </head>
-<body onload="mainApp.initialSetup()">
+<body onload="curPage = 'game'">
 
     
     <script src="firebase.js"></script>
-    <script src="game.js"></script>
     <script src="main.js"></script>
-    <script type="text/javascript">
-    <!--
-        currentPage = "index.html";
-    // -->
-    </script>
+    <script src="game.js"></script>
     
     
 
@@ -35,16 +30,21 @@
             <a href="" onclick="mainApp.logOut()">Log Out</a>
         </header>
 
-        <h1 id="introHeading">Loading...</h1>
+        <h1 id="introHeadingMain">Loading...</h1>
     
-        <p id="theWord">Loading...</p>
+        <p id="curSentence">Loading...</p>
         <p>Current xp:</p>
         <p id="xpCounter">Loading...</p>
         <p>Xp for finishing this sentence:</p>
         <p id="curReward">0</p>
+        <p>Current level:</p>
+        <p id="levelCounter">Loading...</p>
+        <p>Xp to next level:</p>
+        <p id="xpToNextCounter">Loading...</p>
     
         <form>
-            <p>Choose your difficulty:</p><input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
+            <p>Choose your difficulty:</p>
+            <input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
             <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
             <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
 

@@ -10,13 +10,26 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
 </head>
-<body>
+<body onload="curPage = 'tutorial'">
     
     <script src="firebase.js"></script>
+    <script src="main.js"></script>
     <script src="tutorial.js"></script>
 
-    <h1 id="introHeading">Loading...</h1>
+    <h1>Hello there!</h1>
 
+    <h2>Welcome to Typing Hero!</h2>
+    <p>In this game, you type the sentence that appears on-screen. There are three difficulty levels, ranging from relatively normal-looking sentences to random characters, and each difficulty grants a different number of experience points (xp). For each character incorrectly typed (this does include spaces), your xp reward will decrease slightly, but at least 50% of the possible total reward will be given once you finish the sentence.</p>
+    <p>As you earn experience, you will also gain levels (leveling up). Leveling up happens frequently at lower levels, but gets more difficult as your level gets higher.</p>
+    <p>Hope you have fun playing Typing Hero!</p>
+    <p>Please enter a username to get started:</p>
+    <form>
+        <input type="text" id="usernameText" />
+        <input type="button"
+        onclick="giveUsername(
+            document.getElementById('usernameText').value
+        )" value="Submit" />
+    </form>
 
 
     

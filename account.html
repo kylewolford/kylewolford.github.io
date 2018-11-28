@@ -10,17 +10,12 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
 </head>
-<body>
+<body onload="curPage = 'account'">
 
     
     <script src="firebase.js"></script>
     <script src="main.js"></script>
     <script src="account.js"></script>
-    <script type="text/javascript">
-        <!--
-            currentPage = "account.html";
-        // -->
-        </script>
     
     <div id="accountSettingsLoader">
         <p>Loading account settings...</p>
@@ -36,11 +31,18 @@
     
         <p>Current xp:</p>
         <p id="xpCounter">Loading...</p>
+        <p>Current level:</p>
+        <p id="levelCounter">Loading...</p>
+        <p>Xp to next level:</p>
+        <p id="xpToNextCounter">Loading...</p>
     
         <form>
             <p id="unameChangePrompt">Loading...</p>
             <input type="text" id="newUnameInput" />
-            <input type="button" value="change" onClick="accountFunctions.updateUsername()") />
+            <input type="button" value="change"
+            onClick="mainApp.ChangeUsername(
+                document.getElementById('newUnameInput').value
+            ") />
         </form>
     
 
