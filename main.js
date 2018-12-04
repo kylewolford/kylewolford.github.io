@@ -121,8 +121,7 @@ var curPage = "";
                     xpToNext = 0;
                 }
 
-                if (curUser.xp == 0) {
-                    giveXp(30);
+                if (curUser.xp == 0 && curPage != 'tutorial') {
                     window.location.replace("tutorial.html");
                 }
                 
@@ -176,13 +175,13 @@ var curPage = "";
         updateDisplays();
     }
 
-    function changeUsername(newName) {
+    function changeUsername(newName) { // return -1, error; 0, no error
         // get most current database information for user
         copyToLocal();
         // new name must be between 1 and 20 characters
         if (newName.length <= 0 || newName.length > 20) {
-            alert("Invalid username. Please enter a new one.");
-            return;
+            alert("Invalid username. Please enter a new one between 1 and 20 characters.");
+            return -1;
         }
         // change local username
         curUser.username = String(newName);
@@ -191,6 +190,7 @@ var curPage = "";
         copyToDatabase();
         
         updateDisplays();
+        return 0;
     }
 
     function fnDelete() {
@@ -258,10 +258,7 @@ function updateDisplays() {
         case 'account':
             updateDisplaysAccount();
             break;
-        case 'tutorial':
-            updateDisplaysTutorial();
-            break;
         default:
-            console.log("curPage is not game, account, or tutorial");
+            console.log("curPage is not game or account");
     }
 }

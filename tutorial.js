@@ -7,10 +7,9 @@ function initialSetupTutorial() {
 }
 
 function giveUsername(name) {
-    mainApp.changeUsername(name);
-    window.location.replace("index.html");
-}
-
-function updateDisplaysTutorial() {
-
+    result = mainApp.changeUsername(name);
+    if (result != -1) {
+        mainApp.giveXp(30);
+        window.location.replace("index.html");
+    }
 }

@@ -36,29 +36,30 @@
         </header>
         <h2 id="introHeading">Loading...</h2>
     
-        <table class="playerInfo">
-            <tr>
-                <th>Current xp:</th>
-                <th>Current level:</th>
-                <th>Xp to next level:</th>
-            </tr>
-            <tr>
-                <td id="xpCounter">Loading...</td>
-                <td id="levelCounter">Loading...</td>
-                <td id="xpToNextCounter">Loading...</td>
-            </tr>
-        </table>
         
+        <form class="userControl">
+            <p id="unameChangePrompt">Loading...</p>
+            <input type="text" id="newUnameInput" />
+            <input type="button" value="change"
+            onClick="mainApp.changeUsername(
+                document.getElementById('newUnameInput').value
+             );window.reload" />
+        </form>
     
         <footer>
-            <form>
-                <p id="unameChangePrompt">Loading...</p>
-                <input type="text" id="newUnameInput" />
-                <input type="button" value="change"
-                onClick="mainApp.ChangeUsername(
-                    document.getElementById('newUnameInput').value
-                ") />
-            </form>
+            <table class="playerInfo">
+                <tr>
+                    <th>Current xp:</th>
+                    <th>Current level:</th>
+                    <th>Xp to next level:</th>
+                </tr>
+                <tr>
+                    <td id="xpCounter">Loading...</td>
+                    <td id="levelCounter">Loading...</td>
+                    <td id="xpToNextCounter">Loading...</td>
+                </tr>
+            </table>
+            
         </footer>
     
 

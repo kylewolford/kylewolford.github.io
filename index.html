@@ -38,29 +38,33 @@
         <h2 id="introHeadingMain">Loading...</h2>
     
         <p id="curSentence">Loading...</p>
-        <table style="width: 100%" class="playerInfo">
-            <tr>
-                <th>Current xp:</th>
-                <th>Current level:</th>
-                <th>Xp to next level:</th>
-                <th>Xp for finishing this sentence:</th> 
-            </tr>
-            <tr>
-                <td id="xpCounter">Loading...</td>
-                <td id="levelCounter">Loading...</td>
-                <td id="xpToNextCounter">Loading...</td>
-                <td id="curReward">Loading...</td>
-            </tr>
-        </table>
-    
+
+        
         <footer>
-            <form>
-                <p>Choose your difficulty:</p>
+            <form class="userControl">
+                <p style="font-weight: bold">Choose your difficulty:</p>
                 <input type="radio" name="difficulty" onchange="changeDifficulty(0)" checked/>Easy
                 <input type="radio" name="difficulty" onchange="changeDifficulty(1)" />Normal
                 <input type="radio" name="difficulty" onchange="changeDifficulty(2)" />Hard
-
+            
             </form>
+            <table style="width: 100%" class="playerInfo">
+                <tr>
+                    <th>Current xp:</th>
+                    <th>Current level:</th>
+                    <th>Xp to next level:</th>
+                    <th>Xp for finishing this sentence:</th> 
+                </tr>
+                <tr>
+                    <td id="xpCounter">Loading...</td>
+                    <td id="levelCounter">Loading...</td>
+                    <td id="xpToNextCounter">Loading...</td>
+                    <td id="curReward">Loading...</td>
+                </tr>
+            </table>
+    
+        
+            
         </footer>
 
     </div>

@@ -12,8 +12,6 @@ html {
 
 p, h1, h2, h3, a, a:visited, tr, td, th {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-
 }
 
 body {
@@ -49,13 +47,13 @@ header table tr td {
 p#curSentence {
     font-size: 28pt;
     text-align: center;
-    padding-top: 5em;
-    padding-bottom: 5em;
+    padding-top: 3em;
+    padding-bottom: 3em;
 }
 
-.playerInfo, {
+.playerInfo {
     width: 100%;
-    margin: 2em 0em;
+    margin: 0.5em 0em;
     table-layout: fixed;
 }
 
@@ -69,9 +67,24 @@ th {
 }
 
 footer {
+    background-color: lightgray;
     padding: 2em 1em;
+    bottom: 0;
+    position: absolute;
 }
 
-footer p {
+/* Choose your difficulty style */
+p {
     margin-bottom: 1em;
+}
+
+h1, h2, h3, h4, p, form {
+    margin: 10px;
+    padding: 5px;
+}
+
+.userControl {
+    margin-bottom: 2em;
+    margin-top: 0;
+    text-align: center;
 }
