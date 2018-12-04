@@ -1,0 +1,77 @@
+
+/* reset styles */
+html {
+    font-size: 18px;
+ }
+ body, div, footer, header, h1, h2, h3, p {
+    border: 0;
+    padding: 0;
+    margin: 0;
+ }
+
+
+p, h1, h2, h3, a, a:visited, tr, td, th {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+
+}
+
+body {
+    background-color: white;
+    color: black;
+}
+
+header {
+    padding-bottom: 1em;
+    font-size: 12pt;
+    display: inline-block;
+}
+
+header table {
+    width: 100%;
+    table-layout: fixed;
+    background-color: lightgray;
+    margin-bottom: 1em;
+}
+
+
+header table tr td a, a:visited {
+    color: darkred;
+    text-decoration: none;
+    text-align: center;
+}
+
+header table tr td {
+    text-align: center;
+}
+
+
+p#curSentence {
+    font-size: 28pt;
+    text-align: center;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.playerInfo, {
+    width: 100%;
+    margin: 2em 0em;
+    table-layout: fixed;
+}
+
+.playerInfo td {
+    text-align: center;
+
+}
+
+th {
+    font-weight: bold;
+}
+
+footer {
+    padding: 2em 1em;
+}
+
+footer p {
+    margin-bottom: 1em;
+}

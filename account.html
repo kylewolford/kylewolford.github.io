@@ -9,6 +9,7 @@
     
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
 
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body onload="curPage = 'account'">
 
@@ -23,27 +24,42 @@
 
     <div id="accountSettings" style="visibility: hidden">
         <header>
-            <a href="index.html">Play</a>
-            <a href="account.html">Account settings</a>
-            <a href="" onclick="mainApp.logOut()">Log Out</a>
+            <table>
+                <tr>
+                    <td><a href="index.html">Play</a></td>
+                    <td><a href="account.html">Account settings</a></td>
+                    <td><a href="" onclick="mainApp.logOut()">Log Out</a></td>
+                </tr>
+            </table>
+            
+            
         </header>
-        <h1 id="introHeading">Loading...</h1>
+        <h2 id="introHeading">Loading...</h2>
     
-        <p>Current xp:</p>
-        <p id="xpCounter">Loading...</p>
-        <p>Current level:</p>
-        <p id="levelCounter">Loading...</p>
-        <p>Xp to next level:</p>
-        <p id="xpToNextCounter">Loading...</p>
+        <table class="playerInfo">
+            <tr>
+                <th>Current xp:</th>
+                <th>Current level:</th>
+                <th>Xp to next level:</th>
+            </tr>
+            <tr>
+                <td id="xpCounter">Loading...</td>
+                <td id="levelCounter">Loading...</td>
+                <td id="xpToNextCounter">Loading...</td>
+            </tr>
+        </table>
+        
     
-        <form>
-            <p id="unameChangePrompt">Loading...</p>
-            <input type="text" id="newUnameInput" />
-            <input type="button" value="change"
-            onClick="mainApp.ChangeUsername(
-                document.getElementById('newUnameInput').value
-            ") />
-        </form>
+        <footer>
+            <form>
+                <p id="unameChangePrompt">Loading...</p>
+                <input type="text" id="newUnameInput" />
+                <input type="button" value="change"
+                onClick="mainApp.ChangeUsername(
+                    document.getElementById('newUnameInput').value
+                ") />
+            </form>
+        </footer>
     
 
     </div>
