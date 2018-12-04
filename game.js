@@ -105,6 +105,9 @@ function checkPress(press, curString) {
         }
     }
     if (curString.length < 1) {
+        if (xpToNext <= xpReward) {
+            alert("Level up! You are now level " + Number(curLevel+1) + "!");
+        }
         mainApp.giveXp(xpReward);
         makeSentence();
         updateDisplays();

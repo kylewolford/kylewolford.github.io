@@ -61,11 +61,6 @@ var curPage = "";
             initialSetup();
 
 
-            if (curUser.xp == 0) {
-                mainApp.giveXp(100);
-                window.location.replace("tutorial.html");
-            }
-
         } else {
             // Redirect to login page
             uid = null;
@@ -104,7 +99,7 @@ var curPage = "";
             username: "tempName",
             xp: 0
         }
-            
+        copyToLocal();
         app_fireBase.databaseApi.create(path, data, messageHandler);
     }
 
@@ -235,8 +230,7 @@ var curPage = "";
     mainApp.getXpToNext = getXpToNext;
 })()
 
-// Global functions that apply to each page
-// Since the app is relatively small, can include information for all pages in each function
+// General functions that are called for each page
 
 function initialSetup() {
     switch(curPage) {
