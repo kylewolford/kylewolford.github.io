@@ -106,7 +106,11 @@ function checkPress(press, curString) {
     }
     if (curString.length < 1) {
         if (xpToNext <= xpReward) {
-            alert("Level up! You are now level " + Number(curLevel+1) + "!");
+            if (curLevel < 151) {
+                alert("Level up! You are now level " + Number(curLevel+1) + "!");
+            }
+            else {
+                alert("You have reached the level cap. You cannot earn any more xp on this account.");
         }
         mainApp.giveXp(xpReward);
         makeSentence();
