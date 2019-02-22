@@ -248,7 +248,7 @@ function initialSetup() {
     }
 }
 
-
+function initialSetupGame() {}
 
 function updateDisplays() {
     switch(curPage) {
