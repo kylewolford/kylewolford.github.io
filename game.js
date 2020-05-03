@@ -111,6 +111,7 @@ function checkPress(press, curString) {
             }
             else {
                 alert("You have reached the level cap. You cannot earn any more xp on this account.");
+            }
         }
         mainApp.giveXp(xpReward);
         makeSentence();
